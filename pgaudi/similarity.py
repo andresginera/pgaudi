@@ -4,13 +4,38 @@
 from pychimera import patch_environ, enable_chimera
 
 patch_environ()
-# enable_chimera()
+# enable_chimera()  # Problem with this statement, must check it!
+# Maybe doing this in the main.py file only once is better.
+
+"""
+Module for the similarity and removal of double solutions.
+"""
 
 import chimera
 import random
 
 
 def rmsd(ind1, ind2, threshold, subjects):
+    """
+    Function to check if two individuals are two identical solution. 
+
+    Arguments
+    ---------
+    ind1, ind2 : dict
+        Dictionaries representing one individual.
+    threshold : float
+        Maximum RMSD value to consider two individuals as similar.
+        If ``rmsd > threshold``, they are considered different.
+    subjects : list
+        List of molecules to measure.
+
+    Returns
+    -------
+    bool
+        Returns True if both individuals are equal.
+
+    """
+    # See how to silent the printed log of Chimera when the program open the files
     molecules_1 = [chimera.openModels.open(ind1[s])[0] for s in subjects]
     molecules_2 = [chimera.openModels.open(ind2[s])[0] for s in subjects]
 
@@ -26,11 +51,35 @@ def rmsd(ind1, ind2, threshold, subjects):
 
 
 def _rmsd_squared(coords1, coords2):
+    """
+    Function to compute the rmsd
+
+    Arguments
+    ---------
+    coords1, coords2 : array
+        Array with coordinates of a molecule.
+
+    Return
+    ------
+        The rmsd results of both coordinates.
+
+    """
     diff = coords1 - coords2
     return (diff * diff).sum() / coords1.shape[0]
 
 
 def remove_equal(pairs_selected, full_pop):
+    """
+    Function to remove double solutions.
+
+    Arguments
+    ---------
+    pairs_selected : list
+        List of pairs of identical individuals.
+    full_pop : list
+        List of the whole populations of all subprocesses.
+
+    """
     for l in pairs_selected:
         for pair in l:
             if not all(i in full_pop for i in pair):

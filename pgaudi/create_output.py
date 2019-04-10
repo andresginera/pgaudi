@@ -1,16 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+Module to generate the two global output file: .gaudi-output and .gaudi-log.
+"""
+
 import os
 import gaudi
 import yaml
-import glob
-import subprocess
 
 from time import strftime
 
 
 def merge_log(content, cfg):
+    """
+    Function to merge the .gaudi-log files of the different subprocesses.
+
+    Arguments
+    ---------
+    content, cfg : gaudi.parse.Settings
+        gaudi.parse.Settings objects for the yaml files of the subprocess and the main process (input file) respectively.
+
+    """
     log_files = [
         os.path.join(pcfg.output.path, pcfg.output.name + ".gaudi-log")
         for pcfg in content
@@ -31,6 +42,17 @@ def merge_log(content, cfg):
 
 
 def generate_out(selected_pop, cfg):
+    """
+    Function to write the global .gaudi-output file.
+
+    Arguments
+    ---------
+    selected_pop : list
+        List of the unique individuals.
+    cfg : gaudi.parse.Settings
+        gaudi.parse.Settings object of the main process (the input file).
+
+    """
     results = {
         "GAUDI.objectives": [
             "{} ({})".format(obj.name, obj.module) for obj in cfg.objectives
