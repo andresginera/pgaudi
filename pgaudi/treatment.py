@@ -28,7 +28,7 @@ def descompress(directory):
         zipref.extractall(directory)
 
 
-def store(directory, population):
+def store(cfg):
     """
     Function to save the individual in dictionaries with: the path to 
     the .mol2 molecule files, name of the individual and scores.
@@ -53,7 +53,9 @@ def store(directory, population):
 
     """
     pop = []
-    for i in range(population):
+    directory = cfg["output"]["path"]
+    name = cfg["output"]["name"]
+    for i in range(cfg["ga"]["population"]):
         individual = {}
         molecules = glob.glob(os.path.join(directory, "*_{:03d}_*.mol2".format(i)))
         if not bool(molecules):
@@ -62,7 +64,7 @@ def store(directory, population):
         with open(_gaudi[0], "r") as f:
             data = yaml.load(f)
             individual["score"] = data["score"]
-        individual["name"] = "{}_{:03d}".format(directory, i)
+        individual["name"] = "{}/{}_{:03d}".format(os.path.basename(directory), name, i)
         for molecule in molecules:
             if "Protein" in molecule:
                 individual["Protein"] = os.path.abspath(molecule)

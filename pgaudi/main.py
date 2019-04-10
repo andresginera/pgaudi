@@ -34,9 +34,12 @@ def main(input_yaml, processes=multiprocessing.cpu_count()):
 
     """
 
+    with open(input_yaml, "r") as inf:
+        cfg = yaml.safe_load(inf)
+
     # Load data in input file yaml
-    if isinstance(input_yaml, basestring) and os.path.isfile(input_yaml):
-        cfg = gaudi.parse.Settings(input_yaml)
+    # if isinstance(input_yaml, basestring) and os.path.isfile(input_yaml):
+    #     cfg = gaudi.parse.Settings(input_yaml)
 
     # Divide input yaml files
     files, content = parallel.divide_cfg(cfg, processes)
@@ -49,8 +52,8 @@ def main(input_yaml, processes=multiprocessing.cpu_count()):
 
     # Save the files in dictionaries (individuals) and save them in pop
     for con in content:
-        treatment.descompress(con.output.path)
-        group.append(treatment.store(con.output.path, con.ga.population))
+        treatment.descompress(con["output"]["path"])
+        group.append(treatment.store(con))
 
     population = list(itertools.chain.from_iterable(group))
 
