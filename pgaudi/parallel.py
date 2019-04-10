@@ -10,32 +10,41 @@ import itertools
 import similarity
 
 
-def manual_parallelize(yaml_file, processes):
-    with open(yaml_file) as f:
-        data_loaded = yaml.load(f)
+def divide_cfg(cfg, processes):
+
+    yamls_name = []
+    yamls_data = []
+
     # Changes of values for the new yaml files
-    data_loaded["ga"]["generations"] = data_loaded["ga"]["generations"] / processes
-    data_loaded["ga"]["population"] = data_loaded["ga"]["population"] / processes
+    cfg.ga.generations = cfg.ga.generations / processes
+    cfg.ga.population = cfg.ga.population / processes
 
     for i in range(processes):
 
-        data_process = copy.deepcopy(data_loaded)
-        data_process["output"]["name"] += "_input{}".format(i)
-        data_process["output"]["path"] += "_input{}".format(i)
+        cfgp = copy.deepcopy(cfg)
+        cfgp.output.name += "_input{}".format(i)
+        cfgp.output.path += "/input{}".format(i)
+        cfgp._path = os.path.abspath("input_{}.yaml".format(i))
+        if not os.path.isdir(cfgp.output.path):
+            os.mkdir(cfgp.output.path)
 
         with io.open("input_{}.yaml".format(i), "w", encoding="utf8") as f:
-            yaml.dump(data_process, f, default_flow_style=False, allow_unicode=True)
+            yaml.dump(cfgp, f, default_flow_style=False, allow_unicode=True)
+
+        yamls_name.append("input_{}.yaml".format(i))
+        yamls_data.append(cfgp)
+
+    return yamls_name, yamls_data
 
 
 def gaudi_parallel(in_file):
     subprocess.call("gaudi run {}".format(in_file), shell=True)
-    return 0
 
 
 def similarity_parallel(pair_list):
     pairs_selected = []
     for pair_indv in itertools.product(pair_list[0], pair_list[1]):
-        test = similarity.rmsd(pair_indv[0], pair_indv[1], 1.0, ["Metal"])
+        test = similarity.rmsd(pair_indv[0], pair_indv[1], 0.5, ["Ligand"])
         if test == True:
             pairs_selected.append(pair_indv)
     return pairs_selected

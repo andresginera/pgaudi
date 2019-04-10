@@ -1,54 +1,57 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Imports
+# Python
 import multiprocessing
 import subprocess
+import itertools
+import os
+import yaml
+
+# Gaudi
+import gaudi.parse
+
+# Pgaudi
 import parallel
 import treatment
 import similarity
 import create_output
-import itertools
-import os
-import yaml
 
 
 def main(input_yaml, processes=multiprocessing.cpu_count()):
 
     # Load data in input file yaml
-    with open(input_yaml, "r") as stream:
-        data_loaded = yaml.load(stream)
-    name = os.path.basename(data_loaded["output"]["name"])
+    if isinstance(input_yaml, basestring) and os.path.isfile(input_yaml):
+        cfg = gaudi.parse.Settings(input_yaml)
 
     # Divide input yaml files
-    parallel.manual_parallelize(input_yaml, processes)
+    files, content = parallel.divide_cfg(cfg, processes)
 
     # Parallelize gaudi process
     pool = multiprocessing.Pool(processes=processes)
-    yaml_files = subprocess.check_output("ls input_*.yaml", shell=True).split()
-    pool.map(parallel.gaudi_parallel, yaml_files)
+    pool.map(parallel.gaudi_parallel, files)
 
-    # Remove yaml extra generated
-    subprocess.call("rm input_?.yaml", shell=True)
-
-    # Stored all the directories with output files
-    dir_list = treatment.output()
+    group = []
 
     # Save the files in dictionaries (individuals) and save them in pop
-    pop = []
-    for directory in dir_list:
-        pop.append(treatment.store_pop(directory, 30))
+    for con in content:
+        treatment.descompress(con.output.path)
+        group.append(treatment.store(con.output.path, con.ga.population))
+
+    population = list(itertools.chain.from_iterable(group))
 
     # Delete double solutions
-    combinations = list(itertools.combinations(pop, 2))
+    combinations = list(itertools.combinations(group, 2))
     pool = multiprocessing.Pool(len(combinations))
-    pair_selected = pool.map(parallel.similarity_parallel, (combinations))
-    full_pop = list(itertools.chain.from_iterable(pop))
-    similarity.remove_equal(pair_selected, full_pop)
+    pair_selected = pool.starmap(parallel.similarity_parallel, (combinations))
+    similarity.remove_equal(pair_selected, population)
 
-    # Creation of output files and moving of zip to directories according the process
-    create_output.merge_log(name)
-    create_output.generate_out(full_pop, name, input_yaml)
-    create_output.moving_zip(dir_list)
+    print(len(population))
+
+    # Creation of output files
+    create_output.merge_log(content, cfg)
+    create_output.generate_out(population, cfg)
 
 
 if __name__ == "__main__":
@@ -62,6 +65,5 @@ if __name__ == "__main__":
         help="The number of processes in which the main process is divided",
     )
     args = parser.parse_args()
-    print str(args.number_processes)
     main(str(args.yaml_file), int(args.number_processes))
 
