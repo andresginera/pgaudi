@@ -1,0 +1,12 @@
+@<TRIPOS>MOLECULE
+1ag0.pdb 1
+1 0 1 0 0
+SMALL
+NO_CHARGES
+
+
+@<TRIPOS>ATOM
+      1 CU         19.4050   43.2640   17.8860 Cu        1  CU130      0.0000
+@<TRIPOS>BOND
+@<TRIPOS>SUBSTRUCTURE
+     1  CU130      1 RESIDUE           4 A      CU     0 ROOT

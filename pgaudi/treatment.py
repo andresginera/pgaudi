@@ -26,9 +26,10 @@ def descompress(directory):
     for zipf in zipfiles:
         zipref = zipfile.ZipFile(os.path.join(directory, zipf))
         zipref.extractall(directory)
+    return len(zipfiles)
 
 
-def store(cfg):
+def store(pcfg):
     """
     Function to save the individual in dictionaries with: the path to 
     the .mol2 molecule files, name of the individual and scores.
@@ -53,9 +54,9 @@ def store(cfg):
 
     """
     pop = []
-    directory = cfg["output"]["path"]
-    name = cfg["output"]["name"]
-    for i in range(cfg["ga"]["population"]):
+    directory = pcfg.output.path
+    name = pcfg.output.name
+    for i in range(pcfg.ga.population):
         individual = {}
         molecules = glob.glob(os.path.join(directory, "*_{:03d}_*.mol2".format(i)))
         if not bool(molecules):

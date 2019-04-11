@@ -1,0 +1,51 @@
+_path: /home/andres/practicas/gaudi_parallel/tests/docking/kinases/test_28.yaml
+ga:
+    cx_eta: 5
+    cx_pb: 0.5
+    generations: 100
+    lambda_: 3
+    mu: 1
+    mut_eta: 5
+    mut_indpb: 1.0
+    mut_pb: 0.5
+    population: 200
+genes:
+-   module: gaudi.genes.molecule
+    name: Ligand
+    path: ./mol_files/ligand_with_H.mol2
+-   module: gaudi.genes.molecule
+    name: Protein
+    path: ./mol_files/protein_with_H.mol2
+-   module: gaudi.genes.torsion
+    name: T
+    target: Ligand
+    anchor: Ligand/5
+-   module: gaudi.genes.search
+    name: Search
+    radius: 10.0
+    target: Ligand/5
+    interpolation: 0.5
+
+objectives:
+-   module: gaudi.objectives.contacts
+    name: Clashes
+    probes: [Ligand]
+    which: clashes
+    weight: -1.0
+    radius: 5.0
+-   module: gaudi.objectives.vina
+    name: Vina
+    receptor: Protein
+    ligand: Ligand
+    weight: -1.0
+
+output:
+    check_every: 20
+    name: test_28
+    pareto: True
+    path: /home/andres/practicas/gaudi_parallel/tests/docking/kinases/test_28
+#    precision: 6
+similarity:
+    args: [[Ligand], 0.5]
+    kwargs: {}
+    module: gaudi.similarity.rmsd

@@ -5,16 +5,14 @@
 Module for helper function for the parallel process: similarity and gaudi run.
 """
 
-import yaml
 import os
-import io
 import subprocess
 import copy
 import itertools
 import similarity
 
 
-def divide_cfg(cfg, processes):
+def divide_cfg(cfg, processes, complexity):
     """
     From the input cfg (gaudi.parse.Settings) create the new yaml file for the parallel execution.
 
@@ -38,30 +36,28 @@ def divide_cfg(cfg, processes):
     yamls_data = []
 
     # Changes of values for the new yaml files
-    cfg["ga"]["generations"] = cfg["ga"]["generations"] / processes
-    cfg["ga"]["population"] = cfg["ga"]["population"] / processes
-    # cfg.ga.generations = cfg.ga.generations / processes
-    # cfg.ga.population = cfg.ga.population / processes
+    if not complexity:
+        cfg.ga.generations = cfg.ga.generations / processes
+        cfg.ga.population = cfg.ga.population / processes
 
     for i in range(processes):
 
-        cfgp = copy.deepcopy(cfg)
-        cfgp["output"]["name"] += "_input{}".format(i)
-        cfgp["output"]["path"] += "/input{}".format(i)
-        cfgp["_path"] = os.path.abspath("input_{}.yaml".format(i))
-        if not os.path.isdir(cfgp["output"]["path"]):
-            os.mkdir(cfgp["output"]["path"])
+        pcfg = copy.deepcopy(cfg)
+        pcfg.output.name += "_input{}".format(i)
+        pcfg.output.path += "/input{}".format(i)
+        if not os.path.isdir(pcfg.output.path):
+            os.mkdir(pcfg.output.path)
 
-        with io.open("input_{}.yaml".format(i), "w", encoding="utf8") as f:
-            yaml.dump(cfgp, f, default_flow_style=False, allow_unicode=True)
+        with open("input_{}.yaml".format(i), "w") as f:
+            f.write(pcfg.toYAML())
 
         yamls_name.append("input_{}.yaml".format(i))
-        yamls_data.append(cfgp)
+        yamls_data.append(pcfg)
 
     return yamls_name, yamls_data
 
 
-def gaudi_parallel(in_file):
+def gaudi_parallel(yaml):
     """
     Helper function for parallel run of the gaudi run function in a bash terminal.
 
@@ -71,7 +67,7 @@ def gaudi_parallel(in_file):
         Name of the input yaml file.
 
     """
-    subprocess.call("gaudi run {}".format(in_file), shell=True)
+    subprocess.call("gaudi run {}".format(yaml), shell=True)
 
 
 def similarity_parallel(pair_list):

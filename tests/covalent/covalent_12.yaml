@@ -1,0 +1,51 @@
+_path: /home/andres/practicas/tests/gaudi_parallel_test/covalent/covalent_12.yaml
+ga:
+    cx_pb: 0.5
+    lambda_: 3
+    mu: 1
+    mut_indpb: 1.0
+    mut_pb: 0.5
+    population: 200
+    generations: 100
+genes:
+-   module: gaudi.genes.molecule
+    name: Protein
+    path: ./mol_files/protein.mol2
+-   module: gaudi.genes.molecule
+    name: Ligand
+    path: ./mol_files/ligand.mol2
+-   module: gaudi.genes.torsion
+    name: T
+    target: Ligand
+    anchor: Ligand/2
+    rotatable_atom_types: []
+    rotatable_atom_names: [C3,C5,S1,C190,N5,C210,C200,N6,C13,C50,C4,C17,C21,C28,C29,C16,C20]
+
+objectives:
+-   module: gaudi.objectives.contacts
+    name: Clashes
+    probes: [Ligand]
+    which: clashes
+    weight: -1.0
+-   module: gaudi.objectives.ligscore
+    name: Ligscore
+    proteins: [Protein]
+    ligands: [Ligand]
+    weight: -1.0
+-   module: gaudi.objectives.distance
+    name: Distance
+    center_of_mass: True
+    threshold: 0.0
+    tolerance: 5.0
+    target: Ligand/104
+    probes: [Protein/1345, Protein/4352]
+    weight: -1.0
+output:
+    check_every: 10
+    name: covalent_12
+    pareto: true
+    path: /home/andres/practicas/tests/gaudi_parallel_test/covalent/covalent_12
+similarity:
+    args: [[Ligand], 0.2]
+    kwargs: {}
+    module: gaudi.similarity.rmsd
