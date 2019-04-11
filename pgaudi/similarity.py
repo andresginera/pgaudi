@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# from pychimera import patch_environ, enable_chimera
-
-# patch_environ()
-# enable_chimera()  # Problem with this statement, must check it!
-# Maybe doing this in the main.py file only once is better.
-
 """
 Module for the similarity and removal of double solutions.
 """
@@ -15,7 +9,7 @@ import chimera
 import random
 
 
-def rmsd(ind1, ind2, threshold, subjects):
+def rmsd(ind1, ind2, subjects, threshold, *args, **kwargs):
     """
     Function to check if two individuals are two identical solution. 
 

@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+Main module of the package from which the main process is run and the parallelization is controlled.
+"""
+
 from pychimera import patch_environ, enable_chimera
 
 patch_environ()
@@ -14,6 +18,7 @@ import multiprocessing
 import itertools
 import os
 import yaml
+from functools import partial
 
 # Gaudi
 import gaudi.parse
@@ -48,18 +53,19 @@ def main(input_yaml, processes, complexity):
         cfg = gaudi.parse.Settings(input_yaml)
 
     # Divide input yaml files
-    pcfg_names, pcfg_contents = parallel.divide_cfg(cfg, processes, complexity)
+    pcfg_names, pcfgs = parallel.divide_cfg(cfg, processes, complexity)
 
     # Parallelize gaudi process
     pool = multiprocessing.Pool(processes=processes)
     pool.map(parallel.gaudi_parallel, pcfg_names)
+
     for name in pcfg_names:
         os.remove(name)
 
     subpopulations = []
 
     # Save the files in dictionaries (individuals) and save them in subpopulations
-    for pcfg in pcfg_contents:
+    for pcfg in pcfgs:
         pcfg.ga.population = treatment.descompress(pcfg.output.path)
         subpopulations.append(treatment.store(pcfg))
 
@@ -69,13 +75,15 @@ def main(input_yaml, processes, complexity):
     # Delete double solutions
     combinations = list(itertools.combinations(subpopulations, 2))
     pool = multiprocessing.Pool(processes=len(combinations))
-    pair_selected = pool.map(parallel.similarity_parallel, (combinations))
+    pair_selected = pool.map(
+        partial(parallel.similarity_parallel, cfg=cfg), combinations
+    )
     similarity.remove_equal(pair_selected, population)
 
     print(len(population))
 
     # Creation of output files
-    create_output.merge_log(pcfg_contents, cfg)
+    create_output.merge_log(pcfgs, cfg)
     create_output.generate_out(population, cfg)
 
 
@@ -103,7 +111,7 @@ if __name__ == "__main__":
         "--equal",
         help="if set the new subprocesses are computionally equal",
         action="store_true",
-    )    
+    )
     args = parser.parse_args()
     main(args.yaml, args.processes, args.equal)
 

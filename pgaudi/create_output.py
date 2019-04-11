@@ -12,19 +12,19 @@ import yaml
 from time import strftime
 
 
-def merge_log(pcfg_contents, cfg):
+def merge_log(pcfgs, cfg):
     """
     Function to merge the .gaudi-log files of the different subprocesses.
 
     Arguments
     ---------
-    pcfg_contents, cfg : gaudi.parse.Settings
+    pcfgs, cfg : gaudi.parse.Settings
         gaudi.parse.Settings objects for the yaml files of the subprocess and the main process (input file) respectively.
 
     """
     log_files = [
         os.path.join(pcfg.output.path, pcfg.output.name + ".gaudi-log")
-        for pcfg in pcfg_contents
+        for pcfg in pcfgs
     ]
     gaudi_log = os.path.join(cfg.output.path, cfg.output.name + ".gaudi-log")
     with open(gaudi_log, "w") as log:
