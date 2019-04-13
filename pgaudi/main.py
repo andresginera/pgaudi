@@ -5,13 +5,6 @@
 Main module of the package from which the main process is run and the parallelization is controlled.
 """
 
-from pychimera import patch_environ, enable_chimera
-
-patch_environ()
-# enable_chimera()
-
-import chimera
-
 # Imports
 # Python
 import multiprocessing
@@ -28,6 +21,32 @@ import parallel
 import treatment
 import similarity
 import create_output
+
+
+def mksubpopulations(pcfgs):
+    """
+    Function for the creation of the subpopulations.
+
+    Arguments
+    ---------
+    pcfgs : list
+        A list with the contents of the gaudi.parse.Settings 
+        of the new subprocess yaml file.
+    
+    Returns
+    -------
+    subpopulations : list
+        A list of lists of individuals.
+
+    """
+
+    subpopulations = []
+
+    for pcfg in pcfgs:
+        pcfg.ga.population = treatment.descompress(pcfg.output.path)
+        subpopulations.append(treatment.store(pcfg))
+
+    return subpopulations
 
 
 def main(input_yaml, processes, complexity):
@@ -62,14 +81,8 @@ def main(input_yaml, processes, complexity):
     for name in pcfg_names:
         os.remove(name)
 
-    subpopulations = []
-
-    # Save the files in dictionaries (individuals) and save them in subpopulations
-    for pcfg in pcfgs:
-        pcfg.ga.population = treatment.descompress(pcfg.output.path)
-        subpopulations.append(treatment.store(pcfg))
-
     # Merge all subpopulations in a unique population
+    subpopulations = mksubpopulations(pcfgs)
     population = list(itertools.chain.from_iterable(subpopulations))
 
     # Delete double solutions
@@ -80,7 +93,7 @@ def main(input_yaml, processes, complexity):
     )
     similarity.remove_equal(pair_selected, population)
 
-    print(len(population))
+    print("\nTotal population: " + str(len(population)))
 
     # Creation of output files
     create_output.merge_log(pcfgs, cfg)
@@ -94,7 +107,7 @@ if __name__ == "__main__":
 
     parser = arg.ArgumentParser(
         prog="Pgaudi",
-        usage="gaudi run yaml [-p int] [-e] [-h]",
+        usage="python main.py yaml [-p int] [-e] [-h]",
         description="Pgaudi is responsable of the optimization of the performance \
             of the GaudiMM suite by external parallelization",
     )

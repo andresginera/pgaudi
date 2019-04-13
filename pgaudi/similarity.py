@@ -5,6 +5,10 @@
 Module for the similarity and removal of double solutions.
 """
 
+from pychimera import patch_environ, enable_chimera
+
+patch_environ()
+
 import chimera
 import random
 
@@ -29,7 +33,9 @@ def rmsd(ind1, ind2, subjects, threshold, *args, **kwargs):
         Returns True if both individuals are equal.
 
     """
-    # See how to silent the printed log of Chimera when the program open the files
+    
+    enable_chimera()
+
     molecules_1 = [chimera.openModels.open(ind1[s])[0] for s in subjects]
     molecules_2 = [chimera.openModels.open(ind2[s])[0] for s in subjects]
     for m1, m2 in zip(molecules_1, molecules_2):
