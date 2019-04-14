@@ -1,105 +1,54 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""
-Module to work with the files generated after the gaudi run sobprocesses
-"""
-
 import os
-import glob
 import zipfile
 import yaml
+import tempfile
 
 
-def descompress(directory):
+def parse_zip(directory):
     """
-    Function to descompress to zip files generated.
+    Function for parse the output zip files of gaudi and save
+    them in individuals stored in a population.
 
     Arguments
     ---------
     directory : str
-        Path to the output zip files.
-
-    """
-    # subprocess.call("for ZIP in *.zip; do unzip -qq $i; done", shell=True)
-    zipfiles = [f for f in os.listdir(directory) if f.endswith(".zip")]
-    for zipf in zipfiles:
-        zipref = zipfile.ZipFile(os.path.join(directory, zipf))
-        zipref.extractall(directory)
-    return len(zipfiles)
-
-
-def store(pcfg):
-    """
-    Function to save the individual in dictionaries with: the path to 
-    the .mol2 molecule files, name of the individual and scores.
-
-    Arguments
-    ---------
-    directory : str
-        Path to the output descompressed files.
-
-    population : int
-        Number of ideal number of individual per population
+        Path to the directory where the output zip files are located.
 
     Returns
     -------
-    pop : list
-        List of dictionaries in which each element is an individual with the properties:
-            - name
-            - score
-            - Protein
-            - Metal (Optional)
-            - Ligand (Optional)
-
+    population : list
+        List of individuals represented in dictionaries.
+        
     """
-    pop = []
-    directory = pcfg.output.path
-    name = pcfg.output.name
-    for i in range(pcfg.ga.population):
+
+    tmpdir = tempfile.mkdtemp("gaudi")
+    zipfiles = [f for f in os.listdir(directory) if f.endswith(".zip")]
+    population = []
+
+    for zipf in zipfiles:
         individual = {}
-        molecules = glob.glob(os.path.join(directory, "*_{:03d}_*.mol2".format(i)))
-        if not bool(molecules):
-            continue
-        _gaudi = glob.glob(os.path.join(directory, "*_{:03d}.gaudi".format(i)))
-        with open(_gaudi[0], "r") as f:
-            data = yaml.load(f)
-            individual["score"] = data["score"]
-        individual["name"] = "{}/{}_{:03d}".format(os.path.basename(directory), name, i)
-        for molecule in molecules:
-            if "Protein" in molecule:
-                individual["Protein"] = os.path.abspath(molecule)
-            if "Metal" in molecule:
-                individual["Metal"] = os.path.abspath(molecule)
-            if "Ligand" in molecule:
-                individual["Ligand"] = os.path.abspath(molecule)
-        pop.append(individual)
-    return pop
+        path = os.path.join(directory, zipf)
+        zipref = zipfile.ZipFile(path)
+        tmp = os.path.join(tmpdir, os.path.splitext(zipf)[0])
+        try:
+            os.mkdir(tmp)
+        except OSError:
+            pass
+        zipref.extractall(tmp)
+        individual["name"] = path
+        for name in os.listdir(tmp):
+            absname = os.path.join(tmp, name)
+            if name.endswith(".mol2"):
+                if "Protein" in name:
+                    individual["Protein"] = absname
+                elif "Metal" in name:
+                    individual["Metal"] = absname
+                elif "Ligand" in name:
+                    individual["Ligand"] = absname
+            elif name.endswith(".gaudi"):
+                with open(absname, "r") as _gaudi:
+                    individual["score"] = yaml.load(_gaudi)["score"]
+        population.append(individual)
+        zipref.close()
 
-
-# Implementation of the individual as a class
-
-# class MyIndividual(object):
-#     def __init__(self, _gaudi, directory, i):
-#         self.molecules = {}
-#         with open(_gaudi, "r") as f:
-#             data_loaded = yaml.load(f)
-#         if "Protein" in data_loaded:
-#             self.molecules["Protein"] = os.path.join(directory, data_loaded["Protein"])
-#         if "Ligand" in data_loaded:
-#             self.molecules["Ligand"] = os.path.join(directory, data_loaded["Ligand"])
-#         if "Metal" in data_loaded:
-#             self.molecules["Metal"] = os.path.join(directory, data_loaded["Metal"])
-#         self.name = "{}_{:03d}".format(directory, i)
-#         self.number = i
-#         self.score = data_loaded["score"]
-
-# def store(directory, population):
-#     pop = []
-#     for i in range(population):
-#         ind = glob.glob(os.path.join(directory, "*_{:03d}.gaudi".format(i)))
-#         if not bool(ind):
-#             continue
-#         individual = MyIndividual(ind[0], directory, i)
-#         pop.append(individual)
-#     return pop
+    return population

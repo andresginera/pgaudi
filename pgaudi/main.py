@@ -18,35 +18,9 @@ import gaudi.parse
 
 # Pgaudi
 import parallel
-import treatment
+import tmp_treatment
 import similarity
 import create_output
-
-
-def mksubpopulations(pcfgs):
-    """
-    Function for the creation of the subpopulations.
-
-    Arguments
-    ---------
-    pcfgs : list
-        A list with the contents of the gaudi.parse.Settings 
-        of the new subprocess yaml file.
-    
-    Returns
-    -------
-    subpopulations : list
-        A list of lists of individuals.
-
-    """
-
-    subpopulations = []
-
-    for pcfg in pcfgs:
-        pcfg.ga.population = treatment.descompress(pcfg.output.path)
-        subpopulations.append(treatment.store(pcfg))
-
-    return subpopulations
 
 
 def main(input_yaml, processes, complexity):
@@ -82,11 +56,12 @@ def main(input_yaml, processes, complexity):
         os.remove(name)
 
     # Merge all subpopulations in a unique population
-    subpopulations = mksubpopulations(pcfgs)
-    population = list(itertools.chain.from_iterable(subpopulations))
+
+    subpop = pool.map(tmp_treatment.parse_zip, [pcfg.output.path for pcfg in pcfgs])
+    population = list(itertools.chain.from_iterable(subpop))
 
     # Delete double solutions
-    combinations = list(itertools.combinations(subpopulations, 2))
+    combinations = list(itertools.combinations(subpop, 2))
     pool = multiprocessing.Pool(processes=len(combinations))
     pair_selected = pool.map(
         partial(parallel.similarity_parallel, cfg=cfg), combinations
