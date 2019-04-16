@@ -62,6 +62,8 @@ def main(input_yaml, processes, complexity):
 
     # Delete double solutions
     combinations = list(itertools.combinations(subpop, 2))
+
+    print("\nRemoving double solutions...\n")
     pool = multiprocessing.Pool(processes=len(combinations))
     pair_selected = pool.map(
         partial(parallel.similarity_parallel, cfg=cfg), combinations
