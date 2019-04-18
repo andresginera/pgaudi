@@ -33,7 +33,7 @@ def rmsd(ind1, ind2, subjects, threshold, *args, **kwargs):
         Returns True if both individuals are equal.
 
     """
-    
+
     enable_chimera()
 
     molecules_1 = [chimera.openModels.open(ind1[s])[0] for s in subjects]
@@ -63,6 +63,7 @@ def _rmsd_squared(coords1, coords2):
         The rmsd results of both coordinates.
 
     """
+
     diff = coords1 - coords2
     return (diff * diff).sum() / coords1.shape[0]
 
@@ -79,6 +80,7 @@ def remove_equal(pairs_selected, full_pop):
         List of the whole populations of all subprocesses.
 
     """
+
     for l in pairs_selected:
         for pair in l:
             if not all(i in full_pop for i in pair):

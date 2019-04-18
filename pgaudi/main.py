@@ -18,7 +18,7 @@ import gaudi.parse
 
 # Pgaudi
 import parallel
-import tmp_treatment
+import treatment
 import similarity
 import create_output
 
@@ -41,11 +41,9 @@ def main(input_yaml, processes, complexity):
 
     """
 
-    # Load data in input file yaml
+    # Load data input yaml file and generates the input cfgs
     if isinstance(input_yaml, basestring) and os.path.isfile(input_yaml):
         cfg = gaudi.parse.Settings(input_yaml)
-
-    # Divide input yaml files
     pcfg_names, pcfgs = parallel.divide_cfg(cfg, processes, complexity)
 
     # Parallelize gaudi process
@@ -55,22 +53,18 @@ def main(input_yaml, processes, complexity):
     for name in pcfg_names:
         os.remove(name)
 
-    # Merge all subpopulations in a unique population
-
-    subpop = pool.map(tmp_treatment.parse_zip, [pcfg.output.path for pcfg in pcfgs])
+    # Store all individuals in populations and merge them
+    subpop = pool.map(treatment.parse_zip, [pcfg.output.path for pcfg in pcfgs])
     population = list(itertools.chain.from_iterable(subpop))
 
     # Delete double solutions
-    combinations = list(itertools.combinations(subpop, 2))
-
     print("\nRemoving double solutions...\n")
+    combinations = list(itertools.combinations(subpop, 2))
     pool = multiprocessing.Pool(processes=len(combinations))
     pair_selected = pool.map(
         partial(parallel.similarity_parallel, cfg=cfg), combinations
     )
     similarity.remove_equal(pair_selected, population)
-
-    print("\nTotal population: " + str(len(population)))
 
     # Creation of output files
     create_output.merge_log(pcfgs, cfg)

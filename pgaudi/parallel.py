@@ -28,9 +28,9 @@ def divide_cfg(cfg, processes, complexity):
     
     Return
     ------
-    yamls_name : list
+    pcfg_names : list
         A list with the names of the new yaml files generated.
-    yamls_data : list
+    pcfgs : list
         A list with the contents of the gaudi.parse.Settings of each new yaml file.
 
     """
@@ -71,12 +71,11 @@ def gaudi_parallel(yaml):
         Name of the input yaml file.
 
     """
+
     subprocess.call("gaudi run {}".format(yaml), shell=True)
 
 
 def similarity_parallel(pair_list, cfg):
-    # I have to get the arguments of the cfg.similarity.args for the function rmsd.
-    # Right now I have to put the arguments threshold and subject manually.
     """
     Helper function for parallel rmsd function to detect double solutions.
 
@@ -92,6 +91,7 @@ def similarity_parallel(pair_list, cfg):
         List of tuples of the pairs of identical individuals.
 
     """
+    
     pairs_selected = []
     for pair_indv in itertools.product(pair_list[0], pair_list[1]):
         if similarity.rmsd(
