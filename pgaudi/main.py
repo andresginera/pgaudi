@@ -5,6 +5,8 @@
 Main module of the package from which the main process is run and the parallelization is controlled.
 """
 
+from __future__ import absolute_import
+
 # Imports
 # Python
 import multiprocessing
@@ -17,10 +19,7 @@ from functools import partial
 import gaudi.parse
 
 # Pgaudi
-import parallel
-import treatment
-import similarity
-import create_output
+from . import parallel, treatment, similarity, create_output
 
 
 def run(input_yaml, processes, complexity):
