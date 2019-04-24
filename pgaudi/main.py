@@ -23,7 +23,7 @@ import similarity
 import create_output
 
 
-def main(input_yaml, processes, complexity):
+def run(input_yaml, processes, complexity):
     """
     Main function that controls the execution of the parallelization and all subfunctions.
 
@@ -71,18 +71,16 @@ def main(input_yaml, processes, complexity):
     create_output.generate_out(population, cfg)
 
 
-# Change this block to run the program with the arguments for the parallelization
-# inside the yaml file and not in the command line
-if __name__ == "__main__":
+def parse_cli():
     import argparse as arg
 
     parser = arg.ArgumentParser(
         prog="Pgaudi",
-        usage="python main.py yaml [-p int] [-e] [-h]",
+        usage="pgaudi filename [-p int] [-e] [-h]",
         description="Pgaudi is responsable of the optimization of the performance \
             of the GaudiMM suite by external parallelization",
     )
-    parser.add_argument("yaml", type=str, help="the YAML input file")
+    parser.add_argument("filename", type=str, help="the YAML input file")
     parser.add_argument(
         "-p",
         "--processes",
@@ -96,6 +94,14 @@ if __name__ == "__main__":
         help="if set the new subprocesses are computionally equal",
         action="store_true",
     )
-    args = parser.parse_args()
-    main(args.yaml, args.processes, args.equal)
+    return parser.parse_args()
+
+
+def main():
+    args = parse_cli()
+    run(args.filename, args.processes, args.equal)
+
+
+if __name__ == "__main__":
+    main()
 

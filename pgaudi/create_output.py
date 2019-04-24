@@ -61,7 +61,7 @@ def generate_out(population, cfg):
     }
     results["GAUDI.results"] = {}
     for ind in population:
-        name = ind["name"] + ".zip"
+        name = ind["name"]
         results["GAUDI.results"][name] = map(float, ind["score"])
     gaudi_output = os.path.join(cfg.output.path, cfg.output.name + ".gaudi-output")
     with open(gaudi_output, "w+") as out:

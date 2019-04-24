@@ -30,15 +30,14 @@ def parse_zip(directory):
 
     for zipf in zipfiles:
         individual = {}
-        path = os.path.join(directory, zipf)
-        zipref = zipfile.ZipFile(path)
+        zipref = zipfile.ZipFile(os.path.join(directory, zipf))
         tmp = os.path.join(tmpdir, os.path.splitext(zipf)[0])
         try:
             os.mkdir(tmp)
         except OSError:
             pass
         zipref.extractall(tmp)
-        individual["name"] = path
+        individual["name"] = os.path.join(os.path.basename(directory), zipf)
         for name in os.listdir(tmp):
             absname = os.path.join(tmp, name)
             if name.endswith(".mol2"):

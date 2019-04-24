@@ -2,13 +2,13 @@ _path: /home/andres/practicas/gaudi_parallel/tests/data/metal/input.yaml
 ga:
   cx_eta: 5
   cx_pb: 0.5
-  generations: 100
+  generations: 10
   lambda_: 4.0
   mu: 1.0
   mut_eta: 5
   mut_indpb: 1.0
   mut_pb: 0.5
-  population: 120
+  population: 12
 genes:
   - module: gaudi.genes.molecule
     name: Protein

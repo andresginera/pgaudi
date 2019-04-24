@@ -11,7 +11,8 @@ setuptools.setup(
     long_description=long_description,
     author=pgaudi.__author__,
     author_email="andresgineranton@outlook.com",
-    packages=find_packages(),
+    packages=setuptools.find_packages(),
     url="https://github.com/andresginera/compare-equal",
     license="Apache Software License",
+    entry_points={"console_scripts": ["pgaudi=pgaudi.main:main"]},
 )
