@@ -63,11 +63,11 @@ def run(input_yaml, processes, complexity):
     pair_selected = pool.map(
         partial(parallel.similarity_parallel, cfg=cfg), combinations
     )
-    similarity.remove_equal(pair_selected, population)
+    clnpop = similarity.remove_equal(pair_selected, population)
 
     # Creation of output files
     create_output.merge_log(pcfgs, cfg)
-    create_output.generate_out(population, cfg)
+    create_output.generate_out(clnpop, cfg)
 
 
 def parse_cli():

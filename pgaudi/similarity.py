@@ -11,6 +11,7 @@ patch_environ()
 
 import chimera
 import random
+import copy
 
 
 def rmsd(ind1, ind2, subjects, threshold, *args, **kwargs):
@@ -81,8 +82,12 @@ def remove_equal(pairs_selected, full_pop):
 
     """
 
+    copy_pop = copy.deepcopy(full_pop)
+
     for l in pairs_selected:
         for pair in l:
-            if not all(i in full_pop for i in pair):
+            if not all(i in copy_pop for i in pair):
                 continue
-            full_pop.remove(random.choice([pair[0], pair[1]]))
+            copy_pop.remove(random.choice([pair[0], pair[1]]))
+
+    return copy_pop
