@@ -14,12 +14,16 @@ import itertools
 import os
 import yaml
 from functools import partial
+import sys
+import psutil
+import signal
 
 # Gaudi
 import gaudi.parse
 
 # Pgaudi
-from . import parallel, treatment, similarity, create_output
+# from . import parallel, treatment, similarity, create_output
+import parallel, treatment, similarity, create_output
 
 
 def run(input_yaml, processes, complexity):
@@ -47,12 +51,25 @@ def run(input_yaml, processes, complexity):
 
     # Parallelize gaudi process
     pool = multiprocessing.Pool(processes=processes)
-    pool.map(parallel.gaudi_parallel, pcfg_names)
+    try:
+        pool.map_async(
+            parallel.gaudi_parallel, pcfg_names, chunksize=1, callback=None
+        ).get(9999999)
+    except KeyboardInterrupt:
+        pool.terminate()
+        sys.exit("Exiting...")
+    except Exception as e:
+        print("An error ocurred:", type(e).__name__, e.message)
+        pool.terminate()
+    finally:
+        pool.close()
+        pool.join()
 
     for name in pcfg_names:
         os.remove(name)
 
     # Store all individuals in populations and merge them
+    pool = multiprocessing.Pool(processes=processes)
     subpop = pool.map(treatment.parse_zip, [pcfg.output.path for pcfg in pcfgs])
     population = list(itertools.chain.from_iterable(subpop))
 
