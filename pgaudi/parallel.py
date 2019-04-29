@@ -91,7 +91,7 @@ def similarity_parallel(pair_list, cfg):
         List of tuples of the pairs of identical individuals.
 
     """
-    
+
     pairs_selected = []
     for pair_indv in itertools.product(pair_list[0], pair_list[1]):
         if similarity.rmsd(
