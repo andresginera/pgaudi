@@ -1,0 +1,68 @@
+_path: /home/andres/practicas/gaudi_parallel/tests/data/example_output/input_3.yaml
+ga:
+    cx_eta: 5
+    cx_pb: 0.5
+    generations: 25
+    lambda_: 4.0
+    mu: 1.0
+    mut_eta: 5
+    mut_indpb: 1.0
+    mut_pb: 0.5
+    population: 30
+genes:
+-   module: gaudi.genes.molecule
+    name: Protein
+    path: /home/andres/practicas/gaudi_parallel/tests/data/1ag0_0.mol2
+-   module: gaudi.genes.molecule
+    name: Metal
+    path: /home/andres/practicas/gaudi_parallel/tests/data/1ag0_1.mol2
+-   module: gaudi.genes.search
+    mut_eta: 0.5
+    name: Search
+    precision: 5
+    radius: 20.0
+    rotate: false
+    target: Metal/1
+objectives:
+-   atom_types:
+    - Npl
+    - O3
+    - O2-
+    - S3
+    - O2
+    center_of_mass_correction: false
+    distance_correction: true
+    enforce_all_residues: false
+    geometry: octahedron
+    min_atoms: 3
+    module: gaudi.objectives.coordination
+    name: Coordination
+    probe: Metal/1
+    radius: 3.5
+    residues:
+    - Protein/*
+    - Metal/*
+    weight: -1.0
+-   module: gaudi.objectives.contacts
+    name: Clashes
+    probes:
+    - Metal
+    radius: 5.0
+    weight: -1.0
+    which: clashes
+output:
+    check_every: 10
+    compress: true
+    history: false
+    name: 1ag0_input3
+    pareto: false
+    path: /home/andres/practicas/gaudi_parallel/tests/data/example_output/input3
+    precision: 3
+    prompt_on_exception: false
+    verbose: true
+similarity:
+    args:
+    -   - Metal
+    - 1.0
+    kwargs: {}
+    module: gaudi.similarity.rmsd
