@@ -20,8 +20,7 @@ from functools import partial
 import gaudi.parse
 
 # Pgaudi
-# from . import parallel, treatment, similarity, create_output
-import parallel, treatment, similarity, create_output
+from . import parallel, treatment, similarity, create_output
 
 
 def run(input_yaml, processes, complexity):
