@@ -20,8 +20,9 @@ install:
   - conda activate
   # Install Gaudi, Pychimera and Pytest
   - conda install -c omnia -c salilab -c insilichem -c bioconda gaudi
-  - conda install -c insilichem pychimera pytest
+  - conda install -c insilichem pychimera 
   - conda install pcre=8.39
+  - conda install pytest
   - export CHIMERADIR="$HOME/chimera"
   # Install PGaudi
   - pip install .
