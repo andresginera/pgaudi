@@ -13,16 +13,17 @@ before_install:
 install:
   # Configure conda
   - source $HOME/miniconda/etc/profile.d/conda.sh
+  - conda activate
   - conda config --set always_yes yes
   - conda config --remove-key channels || true
-  - conda config --add channels defaults
+  - conda config --add channels conda-forge
+  - conda config --add channels bioconda
+  - conda config --add channels salilab
+  - conda config --add channels omnia
   - conda config --add channels insilichem
-  - conda activate
-  # Install Gaudi, Pychimera and Pytest
-  - conda install six
-  - conda install -c omnia -c salilab -c insilichem -c bioconda gaudi
-  - conda install -c insilichem pychimera pytest
-  - conda install pcre=8.39
+  - conda config --add channels defaults
+  # Install Gaudi, Pychimera, Pytest and PyYaml
+  - conda install gaudi pychimera pytest pyyaml
   - export CHIMERADIR="$HOME/chimera"
   # Install PGaudi
   - pip install .

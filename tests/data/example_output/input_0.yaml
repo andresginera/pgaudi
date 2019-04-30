@@ -1,4 +1,4 @@
-_path: /home/andres/practicas/gaudi_parallel/tests/data/example_output/input_0.yaml
+_path: /home/travis/pgaudi/tests/data/example_output/input_0.yaml
 ga:
     cx_eta: 5
     cx_pb: 0.5
@@ -12,10 +12,10 @@ ga:
 genes:
 -   module: gaudi.genes.molecule
     name: Protein
-    path: /home/andres/practicas/gaudi_parallel/tests/data/1ag0_0.mol2
+    path: /home/travis/pgaudi/tests/data/1ag0_0.mol2
 -   module: gaudi.genes.molecule
     name: Metal
-    path: /home/andres/practicas/gaudi_parallel/tests/data/1ag0_1.mol2
+    path: /home/travis/pgaudi/tests/data/1ag0_1.mol2
 -   module: gaudi.genes.search
     mut_eta: 0.5
     name: Search
@@ -56,7 +56,7 @@ output:
     history: false
     name: 1ag0_input0
     pareto: false
-    path: /home/andres/practicas/gaudi_parallel/tests/data/example_output/input0
+    path: /home/travis/pgaudi/tests/data/example_output/input0
     precision: 3
     prompt_on_exception: false
     verbose: true
