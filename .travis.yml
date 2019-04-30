@@ -19,10 +19,10 @@ install:
   - conda config --add channels insilichem
   - conda activate
   # Install Gaudi, Pychimera and Pytest
+  - conda install six
   - conda install -c omnia -c salilab -c insilichem -c bioconda gaudi
   - conda install -c insilichem pychimera pytest
   - conda install pcre=8.39
-  - conda install six
   - export CHIMERADIR="$HOME/chimera"
   # Install PGaudi
   - pip install .
