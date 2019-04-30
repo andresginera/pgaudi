@@ -23,7 +23,7 @@ install:
   - conda install -c insilichem pychimera pytest
   - export CHIMERADIR="$HOME/chimera"
   # Install PGaudi
-  - pip install -i https://test.pypi.org/simple/ pgaudi
+  - pip install .
 script:
   # Check package
   - cd tests
