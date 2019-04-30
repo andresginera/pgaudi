@@ -3,12 +3,6 @@ python:
   - 2.7
 os:
   - linux
-addons:
-  apt:
-    packages:
-    - sqlite3
-    sources:
-    - travis-ci/sqlite3
 before_install:
   - chmod +x devtools/travis-ci/chimera.sh
   - chmod +x devtools/travis-ci/miniconda.sh
