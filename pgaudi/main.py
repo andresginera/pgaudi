@@ -9,14 +9,12 @@ from __future__ import absolute_import
 
 # Imports
 # Python
+import sys
+import os
 import multiprocessing
 import itertools
-import os
 import yaml
 from functools import partial
-import sys
-import psutil
-import signal
 
 # Gaudi
 import gaudi.parse
