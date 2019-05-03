@@ -6,7 +6,7 @@ of the GaudiMM suite by external parallelization.
 
 .. toctree::
    :maxdepth: 1
-   :caption: User guide:
+   :caption: User guide
 
    description.rst
    installation.rst
