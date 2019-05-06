@@ -91,13 +91,13 @@ def parse_cli():
     banner = '''
     \n    `7MM"""Yb.    .g8"""bgd       db   `7MMF'   `7MF'`7MM"""Yb. `7MMF'       
       MM    `Mb .dP'     `M      ;MM:    MM       M    MM    `Yb. MM        
-      MM    ,Mb dM'       `     ,V^MM.   MM       M    MM     `Mb MM        
+      MM    ,MP dM'       `     ,V^MM.   MM       M    MM     `Mb MM        
       MMmmmdP"  MM             ,M  `MM   MM       M    MM      MM MM        
       MM        MM.    `7MMF'  AbmmmqMA  MM       M    MM     ,MP MM        
       MM        `Mb.     MM   A'     VML YM.     ,M    MM    ,dP' MM        
     .JMML.        `"bmmmdPY .AMA.   .AMMA.`bmmmmd"'  .JMMmmmdP' .JMML.      
 
-    ======================================================================
+    ==================================================================
 
     PGaudi is responsable of the optimization of the performance
     of the GaudiMM suite by external parallelization
@@ -137,7 +137,7 @@ def parse_cli():
     parser.add_argument(
         "-e",
         "--equal",
-        help="Set the new subprocesses generated computionally equal to the main process. [Default: False]",
+        help="Set the new subprocesses generated computionally equal to the main process. [Default = False]",
         action="store_true",
     )
     parser.add_argument(
@@ -151,7 +151,7 @@ def parse_cli():
         "-v",
         "--version",
         action="version",
-        version="%(prog)s 0.1",
+        version="%(prog)s 0.1.0",
         help="Show program's version number and exit.",
     )
 

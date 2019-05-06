@@ -19,6 +19,25 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 
 import pgaudi
+import pgaudi.main
+import pgaudi.parallel
+import pgaudi.create_output
+import pgaudi.treatment
+import pgaudi.similarity
+
+from mock import MagicMock
+
+class Mock(MagicMock):
+
+    def __getattr__(cls, name):
+        if name in ('__file__', '__path__'):
+            return '.',
+        return super(MagicMock, cls).__getattr__(name)
+
+MOCK_MODULES = ["yaml", "chimera"]
+
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+
 
 # -- Project information -----------------------------------------------------
 

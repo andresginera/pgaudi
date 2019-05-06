@@ -13,6 +13,11 @@ of the GaudiMM suite by external parallelization.
    first_use.rst
    faq.rst
 
+.. toctree::
+    :maxdepth: 1
+    :caption: For developers
+
+    api.rst
 
 
 Indices and tables

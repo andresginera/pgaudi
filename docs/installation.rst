@@ -46,3 +46,43 @@ custom channels (-c flags):
 .. code-block:: console
 
     (insilichem)$ pip install -i https://test.pypi.org/simple/ pgaudi
+
+6.-Check if the installation was right with the command:
+
+.. code-block:: console
+
+    (insilichem)$ pgaudi -h 
+
+You will get the next help text:
+
+.. code-block:: console
+
+        `7MM"""Yb.    .g8"""bgd       db   `7MMF'   `7MF'`7MM"""Yb. `7MMF'       
+          MM    `Mb .dP'     `M      ;MM:    MM       M    MM    `Yb. MM        
+          MM    ,MP dM'       `     ,V^MM.   MM       M    MM     `Mb MM        
+          MMmmmdP"  MM             ,M  `MM   MM       M    MM      MM MM        
+          MM        MM.    `7MMF'  AbmmmqMA  MM       M    MM     ,MP MM        
+          MM        `Mb.     MM   A'     VML YM.     ,M    MM    ,dP' MM        
+        .JMML.        `"bmmmdPY .AMA.   .AMMA.`bmmmmd"'  .JMMmmmdP' .JMML.      
+
+        ==================================================================
+
+        PGaudi is responsable of the optimization of the performance
+        of the GaudiMM suite by external parallelization
+
+        See also: https://github.com/andresginera/pgaudi
+
+    
+    Usage: pgaudi <FILENAME> [-p PROCESSES] [-e] [-h] [-v]
+
+    Arguments:
+      Filename        YAML input file.
+
+    Options:
+      -p <PROCESSES>  Number of processes in which the main process is divided.
+                      [Default = cores in this machine: 4]
+      -e, --equal     Set the new subprocesses generated computionally equal to
+                      the main process. [Default: False]
+      -h, --help      Show this help message and exit.
+      -v, --version   Show program's version number and exit.
+
