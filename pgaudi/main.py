@@ -87,32 +87,84 @@ def run(input_yaml, processes, complexity):
 def parse_cli():
     import argparse as arg
 
+    # Customize banner and Usage message
+    banner = '''
+    \n    `7MM"""Yb.    .g8"""bgd       db   `7MMF'   `7MF'`7MM"""Yb. `7MMF'       
+      MM    `Mb .dP'     `M      ;MM:    MM       M    MM    `Yb. MM        
+      MM    ,Mb dM'       `     ,V^MM.   MM       M    MM     `Mb MM        
+      MMmmmdP"  MM             ,M  `MM   MM       M    MM      MM MM        
+      MM        MM.    `7MMF'  AbmmmqMA  MM       M    MM     ,MP MM        
+      MM        `Mb.     MM   A'     VML YM.     ,M    MM    ,dP' MM        
+    .JMML.        `"bmmmdPY .AMA.   .AMMA.`bmmmmd"'  .JMMmmmdP' .JMML.      
+
+    ======================================================================
+
+    PGaudi is responsable of the optimization of the performance
+    of the GaudiMM suite by external parallelization
+
+    See also: https://github.com/andresginera/pgaudi\n
+    '''
+
+    class CapitalisedHelpFormatter(arg.HelpFormatter):
+        def add_usage(self, usage, actions, groups, prefix=None):
+            if prefix is None:
+                prefix = banner
+            return super(CapitalisedHelpFormatter, self).add_usage(
+                usage, actions, groups, prefix
+            )
+
+    # Definining the program and the argument filename
     parser = arg.ArgumentParser(
-        prog="Pgaudi",
-        usage="pgaudi filename [-p int] [-e] [-h]",
-        description="Pgaudi is responsable of the optimization of the performance \
-            of the GaudiMM suite by external parallelization",
+        prog="pgaudi",
+        add_help=False,
+        formatter_class=CapitalisedHelpFormatter,
+        usage="\nUsage: pgaudi <FILENAME> [-p PROCESSES] [-e] [-h] [-v]",
     )
-    parser.add_argument("filename", type=str, help="the YAML input file")
+    parser.add_argument(
+        "filename", type=str, help="YAML input file.", metavar="Filename"
+    )
+
+    # Options
     parser.add_argument(
         "-p",
-        "--processes",
+        metavar="<PROCESSES>",
         type=int,
-        help="the number of processes in which the main process is divided",
+        help="Number of processes in which the main process is divided. [Default = cores in this machine: {}]".format(
+            multiprocessing.cpu_count()
+        ),
         default=multiprocessing.cpu_count(),
     )
     parser.add_argument(
         "-e",
         "--equal",
-        help="if set the new subprocesses are computionally equal",
+        help="Set the new subprocesses generated computionally equal to the main process. [Default: False]",
         action="store_true",
     )
+    parser.add_argument(
+        "-h",
+        "--help",
+        action="help",
+        default=arg.SUPPRESS,
+        help="Show this help message and exit.",
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s 0.1",
+        help="Show program's version number and exit.",
+    )
+
+    # Customing titles
+    parser._positionals.title = "Arguments"
+    parser._optionals.title = "Options"
+
     return parser.parse_args()
 
 
 def main():
     args = parse_cli()
-    run(args.filename, args.processes, args.equal)
+    run(args.filename, args.p, args.equal)
 
 
 if __name__ == "__main__":
