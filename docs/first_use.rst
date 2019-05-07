@@ -40,7 +40,7 @@ Take this into account to set the values of these variables in your input file!
 List with all options:
 
   -p <PROCESSES>  Number of processes in which the main process is divided.
-                  [Default = cores in this machine]
+                  [Default = cores in the machine]
   -e, --equal     Set the new subprocesses generated computationally equal to
                   the main process. [Default = False]
   -h, --help      Show the help message and exit.

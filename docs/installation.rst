@@ -53,11 +53,11 @@ custom channels (-c flags):
 
     (insilichem)$ pgaudi -h 
 
-You will get the next help text:
+And you will get the next help text:
 
-.. code-block:: console
+.. code-block:: text
 
-        `7MM"""Yb.    .g8"""bgd       db   `7MMF'   `7MF'`7MM"""Yb. `7MMF'       
+        `7MM"""Yb.    .g8"""bgd       db   `7MMF'   `7MF'`7MM"""Yb. `7MMF       
           MM    `Mb .dP'     `M      ;MM:    MM       M    MM    `Yb. MM        
           MM    ,MP dM'       `     ,V^MM.   MM       M    MM     `Mb MM        
           MMmmmdP"  MM             ,M  `MM   MM       M    MM      MM MM        
@@ -72,7 +72,7 @@ You will get the next help text:
 
         See also: https://github.com/andresginera/pgaudi
 
-    
+
     Usage: pgaudi <FILENAME> [-p PROCESSES] [-e] [-h] [-v]
 
     Arguments:
@@ -86,3 +86,13 @@ You will get the next help text:
       -h, --help      Show this help message and exit.
       -v, --version   Show program's version number and exit.
 
+.. warning:: 
+
+    If you don't get the help text and instead you have the next error:
+
+    .. code-block:: console
+
+        libgfxinfo.so: undefined symbol: _ZN7pcrecpp2RE4InitERKSsPKNS_10RE_OptionsE
+
+    It is due a problem with the installation of GaudiMM and Chimera-Conda. It is
+    a known problem and is covered in the `Pychimera documentation. <https://pychimera.readthedocs.io/en/latest/faq.html#chimera-reports-problems-with-libgfxinfo-so-and-pcrecpp>`_
