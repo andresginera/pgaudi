@@ -16,14 +16,9 @@ import os
 import sphinx_rtd_theme
 import sys
 
-sys.path.insert(0, os.path.abspath(".."))
+# sys.path.insert(0, os.path.abspath(".."))
 
 import pgaudi
-import pgaudi.main
-import pgaudi.parallel
-import pgaudi.create_output
-import pgaudi.treatment
-import pgaudi.similarity
 
 from mock import MagicMock
 
@@ -35,7 +30,7 @@ class Mock(MagicMock):
         return super(MagicMock, cls).__getattr__(name)
 
 
-MOCK_MODULES = ["gaudi", "gaudi.parse", "yaml", "chimera"]
+MOCK_MODULES = ["gaudi", "gaudi.parse", "chimera"]
 
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
