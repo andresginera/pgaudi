@@ -18,8 +18,8 @@ def merge_log(pcfgs, cfg):
 
     Parameters
     ----------
-    pcfgs, cfg : ``gaudi.parse.Settings``
-        ``gaudi.parse.Settings`` objects for the yaml files of the subprocess and the main process (input file) respectively.
+    pcfgs, cfg : gaudi.parse.Settings
+        `gaudi.parse.Settings` objects for the yaml files of the subprocess and the main process (input file) respectively.
 
     """
 
@@ -47,10 +47,10 @@ def generate_out(population, cfg):
 
     Parameters
     ----------
-    population : ``list``
+    population : list
         List of unique individuals.
-    cfg : ``gaudi.parse.Settings``
-        ``gaudi.parse.Settings`` object of the main process (the input file).
+    cfg : gaudi.parse.Settings
+        `gaudi.parse.Settings` object of the main process (the input file).
 
     """
 

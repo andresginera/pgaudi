@@ -28,16 +28,16 @@ def run(input_yaml, processes, complexity):
 
     Parameters
     ----------
-    input_yaml : ``str`` or ``gaudi.parse.Settings``
+    input_yaml : str or gaudi.parse.Settings
         Path to YAML input file or an already parsed YAML file
-        via ``gaudi.parse.Settings`` class.
-    processes : ``int``
+        via `gaudi.parse.Settings` class.
+    processes : int
         Number of processes in which the main process is divided.
         Default = number of cores detected in the CPU's machine. 
-    complexity : ``bool``
-        If ``True``, the new subprocesses generated are computational
+    complexity : bool
+        If True, the new subprocesses generated are computational
         equal to the main process.
-        Default = ``False``.
+        Default = False.
 
     """
 
@@ -90,7 +90,7 @@ def parse_cli():
 
     Returns
     -------
-    args : ``argparse.Namespace``
+    args : argparse.Namespace
         List of the arguments gathered from the command line.
 
     """

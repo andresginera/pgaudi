@@ -14,12 +14,12 @@ def parse_zip(directory):
 
     Parameters
     ----------
-    directory : ``str``
+    directory : str
         Path to the directory where the output zip files are located.
 
     Returns
     -------
-    population : ``list``
+    population : list
         List of individuals represented in dictionaries.
         
     """
