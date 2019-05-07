@@ -42,9 +42,9 @@ copyright = pgaudi.__copyright__
 author = pgaudi.__author__
 
 # The short X.Y version
-version = u""
+version = "0.2.0"
 # The full version, including alpha/beta/rc tags
-release = u""
+release = "0.2.0"
 
 
 # -- General configuration ---------------------------------------------------

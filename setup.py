@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pgaudi",
-    version="0.1.0",
+    version="0.2.0",
     description=pgaudi.__description__,
     long_description=long_description,
     author=pgaudi.__author__,
