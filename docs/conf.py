@@ -63,6 +63,9 @@ extensions = [
     "sphinx.ext.mathjax",
 ]
 
+napoleon_numpy_docstring = True
+napoleon_use_param = False
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 

@@ -20,18 +20,18 @@ def rmsd(ind1, ind2, subjects, threshold, *args, **kwargs):
 
     Parameters
     ----------
-    ind1, ind2 : dict
+    ind1, ind2 : ``dict``
         Dictionaries representing one individual.
-    threshold : float
+    threshold : ``float``
         Maximum RMSD value to consider two individuals as similar.
         If ``rmsd > threshold``, they are considered different.
-    subjects : list
+    subjects : ``list``
         List of molecules to measure.
 
     Returns
     -------
-    bool
-        Returns True if both individuals are equal.
+    ``bool``
+        Returns ``True`` if both individuals are equal.
 
     """
 
@@ -56,11 +56,12 @@ def _rmsd_squared(coords1, coords2):
 
     Parameters
     ----------
-    coords1, coords2 : array
+    coords1, coords2 : ``numpy.array``
         Array with coordinates of a molecule.
 
     Returns
     -------
+    ``float``
         The rmsd results of both coordinates.
 
     """
@@ -75,9 +76,9 @@ def remove_equal(pairs_selected, full_pop):
 
     Parameters
     ----------
-    pairs_selected : list
+    pairs_selected : ``list``
         List of pairs of identical individuals.
-    full_pop : list
+    full_pop : ``list``
         List of the whole populations of all subprocesses.
 
     """

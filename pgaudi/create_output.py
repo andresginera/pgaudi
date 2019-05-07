@@ -14,12 +14,12 @@ from time import strftime
 
 def merge_log(pcfgs, cfg):
     """
-    Function to merge the .gaudi-log files of the different subprocesses.
+    Function to merge the gaudi-log files of the different subprocesses.
 
     Parameters
     ----------
-    pcfgs, cfg : gaudi.parse.Settings
-        gaudi.parse.Settings objects for the yaml files of the subprocess and the main process (input file) respectively.
+    pcfgs, cfg : ``gaudi.parse.Settings``
+        ``gaudi.parse.Settings`` objects for the yaml files of the subprocess and the main process (input file) respectively.
 
     """
 
@@ -43,14 +43,14 @@ def merge_log(pcfgs, cfg):
 
 def generate_out(population, cfg):
     """
-    Function to write the global .gaudi-output file.
+    Function to write the global gaudi-output file.
 
     Parameters
     ----------
-    population : list
+    population : ``list``
         List of unique individuals.
-    cfg : gaudi.parse.Settings
-        gaudi.parse.Settings object of the main process (the input file).
+    cfg : ``gaudi.parse.Settings``
+        ``gaudi.parse.Settings`` object of the main process (the input file).
 
     """
 

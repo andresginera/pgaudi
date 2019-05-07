@@ -1,8 +1,8 @@
 PGaudi
 ======
 
-PGaudi is a package for the optimization of the performance
-of the GaudiMM suite by external parallelization.
+Parallel Gaudi or PGaudi is a package for the optimization of the performance
+of the GaudiMM suite by an external parallelization.
 
 .. toctree::
    :maxdepth: 1

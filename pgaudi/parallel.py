@@ -14,24 +14,24 @@ import similarity
 
 def divide_cfg(cfg, processes, complexity):
     """
-    From the input cfg (gaudi.parse.Settings) create the new yaml file for the parallel execution.
+    From the input cfg (``gaudi.parse.Settings``) creates the new yaml files for the parallel execution.
 
     Parameters
     ----------
-    cfg : gaudi.parse.Settings
-        The loaded input cfg in a ``gaudi.parse.Settings`` object.
-    processes : int
+    cfg : ``gaudi.parse.Settings``
+        The loaded input file in a ``gaudi.parse.Settings`` object.
+    processes : ``int``
         Number of processes in which the main process is divided.
-    complexity : bool
-        If True, the computational complexity of the new subprocess 
+    complexity : ``bool``
+        If ``True``, the computational complexity of the new subprocess 
         will be the same as for the main process.
     
     Returns
     -------
-    pcfg_names : `list`
+    pcfg_names : ``list``
         A list with the names of the new yaml files generated.
-    pcfgs : list
-        A list with the contents of the gaudi.parse.Settings of each new yaml file.
+    pcfgs : ``list``
+        A list with the contents of the ``gaudi.parse.Settings`` of each new yaml file.
 
     """
 
@@ -67,7 +67,7 @@ def gaudi_parallel(yaml):
 
     Parameters
     ----------
-    yaml : str
+    yaml : ``str``
         Name of the input yaml file.
 
     """
@@ -77,17 +77,17 @@ def gaudi_parallel(yaml):
 
 def similarity_parallel(pair_list, cfg):
     """
-    Helper function for parallel rmsd function to detect double solutions.
+    Helper function for parallel :func:`similarity.rmsd` function to detect double solutions.
 
     Parameters
     ----------
-    pair_list : tuple
+    pair_list : `tuple`
         Tuple of two populations to compare all individuals of each population with 
         the individuals of the other population.
 
     Returns
     -------
-    pairs_selected : list
+    pairs_selected : `list`
         List of tuples of the pairs of identical individuals.
 
     """
