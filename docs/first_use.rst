@@ -35,7 +35,7 @@ Automatically, PGaudi set this option in False to generate computationally
 simpler subprocesses. It divides this variable between the number of processes.
 Take this into account to set the values of these variables in your input file!
 
-FAQ: :ref:`_variables`
+`FAQ: Which values do I set? <https://pgaudi.readthedocs.io/en/latest/faq.html#which-values-for-the-variables-of-the-ga-do-i-set-in-the-input-file>`_
 
 List with all options:
 
@@ -57,6 +57,9 @@ Input files
 
 The input files needed are the same as the GaudiMM's input files. To learn
 how to create them follow the `tutorial <https://gaudi.readthedocs.io/en/latest/input.html#input>`_ of the GaudiMM's documentation.
+
+Output files
+************
 
 For visualize the output file you can simply use the command ``gaudi view`` and visualize the solutions with `GaudiView <https://github.com/insilichem/gaudiview>`_.
 
