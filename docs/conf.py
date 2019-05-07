@@ -27,14 +27,15 @@ import pgaudi.similarity
 
 from mock import MagicMock
 
-class Mock(MagicMock):
 
+class Mock(MagicMock):
     def __getattr__(cls, name):
-        if name in ('__file__', '__path__'):
-            return '.',
+        if name in ("__file__", "__path__"):
+            return (".",)
         return super(MagicMock, cls).__getattr__(name)
 
-MOCK_MODULES = ["yaml", "chimera"]
+
+MOCK_MODULES = ["gaudi", "yaml", "chimera"]
 
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
@@ -60,7 +61,12 @@ release = u""
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "sphinx.ext.todo", "sphinx.ext.mathjax"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
+    "sphinx.ext.mathjax",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
