@@ -12,8 +12,8 @@ def parse_zip(directory):
     Function for parse the output zip files of gaudi and save
     them in individuals stored in a population.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     directory : str
         Path to the directory where the output zip files are located.
 

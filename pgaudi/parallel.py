@@ -19,16 +19,16 @@ def divide_cfg(cfg, processes, complexity):
     Parameters
     ----------
     cfg : gaudi.parse.Settings
-        The loaded input cfg in a gaudi.parse.Settings object.
+        The loaded input cfg in a ``gaudi.parse.Settings`` object.
     processes : int
         Number of processes in which the main process is divided.
     complexity : bool
         If True, the computational complexity of the new subprocess 
         will be the same as for the main process.
     
-    Return
-    ------
-    pcfg_names : list
+    Returns
+    -------
+    pcfg_names : `list`
         A list with the names of the new yaml files generated.
     pcfgs : list
         A list with the contents of the gaudi.parse.Settings of each new yaml file.

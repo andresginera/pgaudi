@@ -13,7 +13,6 @@ import sys
 import os
 import multiprocessing
 import itertools
-import yaml
 from functools import partial
 
 # Gaudi
@@ -25,10 +24,10 @@ from . import parallel, treatment, similarity, create_output
 
 def run(input_yaml, processes, complexity):
     """
-    Main function that controls the execution of the parallelization and all subfunctions.
+    Function that executes the whole job.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     input_yaml : str or gaudi.parse.Settings
         Path to YAML input file or an already parsed YAML file
         via gaudi.parse.Settings class.
@@ -85,6 +84,15 @@ def run(input_yaml, processes, complexity):
 
 
 def parse_cli():
+    """
+    Function to parse the arguments of the command line
+
+    Returns
+    -------
+    args : argparse.Namespace
+        List of the arguments gathered from the command line.
+
+    """
     import argparse as arg
 
     # Customize banner and Usage message
@@ -163,6 +171,9 @@ def parse_cli():
 
 
 def main():
+    """
+    Main function that gathers the arguments of the command line with :func:`parse_cli()` and execute the function :func:`run()`.
+    """
     args = parse_cli()
     run(args.filename, args.p, args.equal)
 

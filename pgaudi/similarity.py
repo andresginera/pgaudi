@@ -18,8 +18,8 @@ def rmsd(ind1, ind2, subjects, threshold, *args, **kwargs):
     """
     Function to check if two individuals are two identical solution. 
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     ind1, ind2 : dict
         Dictionaries representing one individual.
     threshold : float
@@ -54,13 +54,13 @@ def _rmsd_squared(coords1, coords2):
     """
     Function to compute the rmsd
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     coords1, coords2 : array
         Array with coordinates of a molecule.
 
-    Return
-    ------
+    Returns
+    -------
         The rmsd results of both coordinates.
 
     """
@@ -73,8 +73,8 @@ def remove_equal(pairs_selected, full_pop):
     """
     Function to remove double solutions.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     pairs_selected : list
         List of pairs of identical individuals.
     full_pop : list

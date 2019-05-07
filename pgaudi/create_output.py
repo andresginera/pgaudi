@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Module to generate the two global output file: .gaudi-output and .gaudi-log.
+Module to generate the two global output file: file.gaudi-output and file.gaudi-log.
 """
 
 import os
@@ -16,8 +16,8 @@ def merge_log(pcfgs, cfg):
     """
     Function to merge the .gaudi-log files of the different subprocesses.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     pcfgs, cfg : gaudi.parse.Settings
         gaudi.parse.Settings objects for the yaml files of the subprocess and the main process (input file) respectively.
 
@@ -45,8 +45,8 @@ def generate_out(population, cfg):
     """
     Function to write the global .gaudi-output file.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     population : list
         List of unique individuals.
     cfg : gaudi.parse.Settings
