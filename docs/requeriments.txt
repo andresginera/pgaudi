@@ -1,0 +1,3 @@
+pychimera
+pyyaml
+gaudi
