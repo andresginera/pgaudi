@@ -35,7 +35,9 @@ Automatically, PGaudi set this option in False to generate computationally
 simpler subprocesses. It divides this variable between the number of processes.
 Take this into account to set the values of these variables in your input file!
 
-`FAQ: Which values do I set? <https://pgaudi.readthedocs.io/en/latest/faq.html#which-values-for-the-variables-of-the-ga-do-i-set-in-the-input-file>`_
+.. hint::
+
+    `FAQ: Which values do I set? <https://pgaudi.readthedocs.io/en/latest/faq.html#which-values-for-the-variables-of-the-ga-do-i-set-in-the-input-file>`_
 
 List with all options:
 
