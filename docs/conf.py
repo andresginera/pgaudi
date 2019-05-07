@@ -30,7 +30,7 @@ class Mock(MagicMock):
         return super(MagicMock, cls).__getattr__(name)
 
 
-MOCK_MODULES = ["gaudi", "gaudi.parse", "chimera"]
+MOCK_MODULES = ["gaudi", "gaudi.parse", "chimera", "pychimera"]
 
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
