@@ -22,13 +22,13 @@ import gaudi.parse
 from . import parallel, treatment, similarity, create_output
 
 
-def run(input_yaml, processes, complexity):
+def run(cfg, processes, complexity):
     """
     Function that executes the whole job.
 
     Parameters
     ----------
-    input_yaml : str or gaudi.parse.Settings
+    cfg : str or gaudi.parse.Settings
         Path to YAML input file or an already parsed YAML file
         via `gaudi.parse.Settings` class.
     processes : int
@@ -42,8 +42,8 @@ def run(input_yaml, processes, complexity):
     """
 
     # Load data input yaml file and generates the input cfgs
-    if isinstance(input_yaml, basestring) and os.path.isfile(input_yaml):
-        cfg = gaudi.parse.Settings(input_yaml)
+    if isinstance(cfg, basestring) and os.path.isfile(cfg):
+        cfg = gaudi.parse.Settings(cfg)
     pcfg_names, pcfgs = parallel.divide_cfg(cfg, processes, complexity)
 
     # Parallelize gaudi process
