@@ -20,7 +20,7 @@ With the option ``-p <PROCESSES>`` you can specify the number
 of subprocesses in which the main process is divided.
 
 PGaudi automatically detects the number of cores in the machine
-and set this value as the number of subprocess to divide.
+and sets this value as the number of subprocess to divide.
 
 Complexity of the subprocesses
 ------------------------------
@@ -32,7 +32,7 @@ individuals per population of the new subprocesses are the same as in the input
 file.
 
 Automatically, PGaudi set this option in False to generate computationally
-simpler subprocesses. It divides this variable between the number of processes.
+simpler subprocesses. It divides these variables between the number of processes.
 Take this into account to set the values of these variables in your input file!
 
 .. hint::
