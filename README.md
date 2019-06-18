@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/andresginera/pgaudi.svg?branch=master)](https://travis-ci.org/andresginera/pgaudi)
 [![Documentation Status](https://readthedocs.org/projects/pgaudi/badge/?version=latest)](https://pgaudi.readthedocs.io/en/latest/?badge=latest)
-[![Python 2.7.15](https://img.shields.io/badge/python-2.7.15-blue.svg)](https://www.python.org/downloads/release/python-2715)
+[![Python 2.7.16](https://img.shields.io/badge/python-2.7.16-blue.svg)](https://www.python.org/downloads/release/python-2716/)
+[![](https://img.shields.io/github/license/andresginera/pgaudi.svg?color=orange)](https://opensource.org/licenses/Apache-2.0)
+![](https://img.shields.io/static/v1.svg?label=platform&message=linux&color=lightgrey)
 
 # PGaudi package
 
@@ -18,4 +20,4 @@ You can see the license in detail in the [LICENSE](./LICENSE) file.
 
 Citation section. 
 
-For contact us: example@gmail.com
+For contact us, please, use the email andresgineranton@outlook.com, or the [issues section](https://github.com/andresginera/pgaudi/issues) of this repository. 
