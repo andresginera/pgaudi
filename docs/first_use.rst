@@ -20,7 +20,7 @@ With the option ``-p <PROCESSES>`` you can specify the number
 of subprocesses in which the main process is divided.
 
 PGaudi automatically detects the number of cores in the machine
-and sets this value as the number of subprocess to divide.
+and sets this value as the number of subprocesses.
 
 Complexity of the subprocesses
 ------------------------------
