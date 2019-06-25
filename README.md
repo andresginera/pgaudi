@@ -22,7 +22,7 @@
 [![Documentation Status](https://readthedocs.org/projects/pgaudi/badge/?version=latest)](https://pgaudi.readthedocs.io/en/latest/?badge=latest)
 [![Python 2.7.16](https://img.shields.io/badge/python-2.7.16-blue.svg)](https://www.python.org/downloads/release/python-2716/)
 [![](https://img.shields.io/github/license/andresginera/pgaudi.svg?color=orange)](http://www.apache.org/licenses/LICENSE-2.0)
-![](https://img.shields.io/static/v1.svg?label=platform&message=linux&color=lightgrey)
+![](https://img.shields.io/static/v1.svg?label=platform&message=linux%20|%20osx&color=lightgrey)
 [![DOI](https://zenodo.org/badge/179753060.svg)](https://zenodo.org/badge/latestdoi/179753060)
 
 # PGaudi package
