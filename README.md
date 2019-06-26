@@ -27,15 +27,24 @@
 
 # PGaudi package
 
-PGaudi is a complement package of the [GaudiMM suite](https://github.com/insilichem/gaudi) for parallelization and optimization of the execution performance.
+PGaudi is a complement package of the [GaudiMM suite](https://github.com/insilichem/gaudi) for optimize the execution performance through a parallelization.
 
-## Documentation
+# Features
 
-The documentation of the package is stored in the docs/ directory and also it is available as HTML in [Read the Docs](https://pgaudi.readthedocs.io/en/latest/).
+**Parallelization the process and gathering the output in a unique file**
+
+**Control the behavior of the parallelization**
+
+* You can set the cores that you want to use.
+* And you can activate or deactivate the simplification of the subprocesses in the parallelization.
+
+## Official documentation
+
+The documentation of the package is stored in the [``docs/``](https://github.com/andresginera/pgaudi/tree/master/docs) directory and also it is available as HTML in [Read the Docs](https://pgaudi.readthedocs.io/en/latest/).
 
 ## License
 
-You can see the license in detail in the [LICENSE](./LICENSE) file.
+PGaudi is under the license Apache 2.0. You can see the license in detail in the [LICENSE](./LICENSE) file.
 
 ## Citation
 
