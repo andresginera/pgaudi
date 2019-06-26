@@ -29,7 +29,7 @@
 
 PGaudi is a complement package of the [GaudiMM suite](https://github.com/insilichem/gaudi) for optimize the execution performance through a parallelization.
 
-# Features
+## Features
 
 **Parallelization the process and gathering the output in a unique file**
 
