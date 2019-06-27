@@ -18,10 +18,10 @@
    See the License for the specific language governing permissions and
    limitations under the License. -->
 
-[![Build Status](https://travis-ci.org/andresginera/pgaudi.svg?branch=master)](https://travis-ci.org/andresginera/pgaudi)
+[![Build Status](https://travis-ci.org/insilichem/pgaudi.svg?branch=master)](https://travis-ci.org/insilichem/pgaudi)
 [![Documentation Status](https://readthedocs.org/projects/pgaudi/badge/?version=latest)](https://pgaudi.readthedocs.io/en/latest/?badge=latest)
 [![Python 2.7.16](https://img.shields.io/badge/python-2.7.16-blue.svg)](https://www.python.org/downloads/release/python-2716/)
-[![](https://img.shields.io/github/license/andresginera/pgaudi.svg?color=orange)](http://www.apache.org/licenses/LICENSE-2.0)
+[![](https://img.shields.io/github/license/insilichem/pgaudi.svg?color=orange)](http://www.apache.org/licenses/LICENSE-2.0)
 ![](https://img.shields.io/static/v1.svg?label=platform&message=linux%20|%20osx&color=lightgrey)
 [![DOI](https://zenodo.org/badge/179753060.svg)](https://zenodo.org/badge/latestdoi/179753060)
 
@@ -40,7 +40,7 @@ PGaudi is a complement package of the [GaudiMM suite](https://github.com/insilic
 
 ## Official documentation
 
-The documentation of the package is stored in the [``docs/``](https://github.com/andresginera/pgaudi/tree/master/docs) directory and also it is available as HTML in [Read the Docs](https://pgaudi.readthedocs.io/en/latest/).
+The documentation of the package is stored in the [``docs/``](https://github.com/insilichem/pgaudi/tree/master/docs) directory and also it is available as HTML in [Read the Docs](https://pgaudi.readthedocs.io/en/latest/).
 
 ## License
 
@@ -50,4 +50,4 @@ PGaudi is under the license Apache 2.0. You can see the license in detail in the
 
 Citation section. 
 
-For contact us, please, use the email andresgineranton@outlook.com, or the [issues section](https://github.com/andresginera/pgaudi/issues) of this repository. 
+For contact us, please, use the email andresgineranton@outlook.com, or the [issues section](https://github.com/insilichem/pgaudi/issues) of this repository. 

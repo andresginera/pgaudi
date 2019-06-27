@@ -36,6 +36,6 @@ It consists of five modules:
 
 __author__ = "Andres Giner Anton"
 __copyright__ = "2019, InsiliChem"
-__url__ = "https://github.com/andresginera/compare-equal"
+__url__ = "https://github.com/insilichem/pgaudi"
 __title__ = "PGaudi"
 __description__ = "A package for the optimization of the performance of the GaudiMM suite by external parallelization."

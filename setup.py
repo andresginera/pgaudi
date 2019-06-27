@@ -12,7 +12,7 @@ setuptools.setup(
     author=pgaudi.__author__,
     author_email="andresgineranton@outlook.com",
     packages=setuptools.find_packages(),
-    url="https://github.com/andresginera/compare-equal",
+    url="https://github.com/insilichem/pgaudi",
     license="Apache Software License",
     entry_points={"console_scripts": ["pgaudi=pgaudi.main:main"]},
 )

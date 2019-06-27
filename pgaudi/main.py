@@ -130,10 +130,10 @@ def parse_cli():
 
     ==================================================================
 
-    PGaudi is responsable of the optimization of the performance
+    PGaudi is responsible of the optimization of the performance
     of the GaudiMM suite by external parallelization
 
-    See also: https://github.com/andresginera/pgaudi\n
+    See also: https://github.com/insilichem/pgaudi\n
     '''
 
     class CapitalisedHelpFormatter(arg.HelpFormatter):

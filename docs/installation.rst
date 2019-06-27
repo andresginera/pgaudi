@@ -67,10 +67,10 @@ And you will get the next help text:
 
         ==================================================================
 
-        PGaudi is responsable of the optimization of the performance
+        PGaudi is responsible of the optimization of the performance
         of the GaudiMM suite by external parallelization
 
-        See also: https://github.com/andresginera/pgaudi
+        See also: https://github.com/insilichem/pgaudi
 
 
     Usage: pgaudi <FILENAME> [-p PROCESSES] [-e] [-h] [-v]
@@ -80,8 +80,8 @@ And you will get the next help text:
 
     Options:
       -p <PROCESSES>  Number of processes in which the main process is divided.
-                      [Default = cores in this machine: 4]
-      -e, --equal     Set the new subprocesses generated computionally equal to
+                      [Default = cores in this machine: X]
+      -e, --equal     Set the new subprocesses generated computationally equal to
                       the main process. [Default: False]
       -h, --help      Show this help message and exit.
       -v, --version   Show program's version number and exit.
