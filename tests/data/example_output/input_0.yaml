@@ -1,4 +1,4 @@
-_path: //home/travis/build/insilichem/pgaudi/tests/data/example_output/input_0.yaml
+_path: /home/travis/build/insilichem/pgaudi/tests/data/example_output/input_0.yaml
 ga:
     cx_eta: 5
     cx_pb: 0.5
